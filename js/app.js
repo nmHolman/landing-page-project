@@ -18,6 +18,7 @@
  * 
 */
 let sectionList = document.querySelectorAll('section');
+let navItem = document.getElementsByClassName('menu__link');
 
 /**
  * End Global Variables
@@ -53,8 +54,8 @@ function buildNav(sections) {
 };
 
 // Add class 'active' to section when near top of viewport
-function activeSection(sections) {
-    let navItem = document.querySelectorAll('li');
+function activeSection(section, links) {
+    
     
     for (i = 0; i < sectionList.length; i++) {
         let sectTop = sectionList[i].getBoundingClientRect().top;
@@ -68,13 +69,29 @@ function activeSection(sections) {
     }
 };
 
-document.addEventListener('scroll', (sectionList)=> {
-    activeSection(sectionList);
+document.addEventListener('scroll', (sectionList, navItem)=> {
+    activeSection(sectionList, navItem);
 });
 
 
 // Scroll to anchor ID using scrollTO event
+function goToSection(nav, section) {
+    for (i = 0; i < nav.length; i++) {    
+        nav[i].addEventListener('click', (e)=> {
+            let sectionList = document.querySelectorAll('section');
 
+            s = '[data-nav=\'' + e.target.innerText +'\']';
+            sect = document.querySelector(s);
+            
+            window.scrollTo({
+                top: sect.offsetTop,
+                left: 0,
+                behavior: 'smooth'
+            })
+            
+        })
+    }
+};
 
 /**
  * End Main Functions
@@ -86,6 +103,7 @@ document.addEventListener('scroll', (sectionList)=> {
 buildNav(sectionList);
 
 // Scroll to section on link click
+goToSection(navItem, sectionList)
 
 // Set sections as active
 
