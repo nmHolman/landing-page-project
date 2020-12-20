@@ -69,11 +69,6 @@ function activeSection(section, links) {
     }
 };
 
-document.addEventListener('scroll', (sectionList, navItem)=> {
-    activeSection(sectionList, navItem);
-});
-
-
 // Scroll to anchor ID using scrollTO event
 function goToSection(nav, section) {
     for (i = 0; i < nav.length; i++) {    
@@ -89,7 +84,7 @@ function goToSection(nav, section) {
                 behavior: 'smooth'
             })
             
-        })
+        });
     }
 };
 
@@ -106,5 +101,7 @@ buildNav(sectionList);
 goToSection(navItem, sectionList)
 
 // Set sections as active
-
+document.addEventListener('scroll', (sectionList, navItem)=> {
+    activeSection(sectionList, navItem);
+});
 
